@@ -16,7 +16,7 @@ class WSS2SSoapClient extends SoapClient
     /**
      * {@inheritdoc}
      */
-    static function getWsdlUrl($wsdlEnvironment)
+    public static function getWsdlUrl($wsdlEnvironment)
     {
         $environments = array(
             'test' => 'https://testecomm.sella.it/gestpay/GestPayWS/WsS2S.asmx?wsdl',

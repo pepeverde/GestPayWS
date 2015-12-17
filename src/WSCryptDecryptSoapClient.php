@@ -16,7 +16,7 @@ class WSCryptDecryptSoapClient extends SoapClient
     /**
      * {@inheritdoc}
      */
-    static function getWsdlUrl($wsdlEnvironment)
+    public static function getWsdlUrl($wsdlEnvironment)
     {
         $environments = array(
             'test' => 'https://testecomm.sella.it/gestpay/GestPayWS/WsCryptDecrypt.asmx?wsdl',

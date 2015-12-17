@@ -22,5 +22,5 @@ interface SoapClientInterface
      * @param string $wsdlEnvironment Either "test" or "production"
      * @return string
      */
-    static function getWsdlUrl($wsdlEnvironment);
+    public static function getWsdlUrl($wsdlEnvironment);
 }

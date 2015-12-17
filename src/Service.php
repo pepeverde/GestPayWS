@@ -34,8 +34,8 @@ abstract class Service
      */
     protected function validateParameters(Parameter $parameters)
     {
-      if (!$parameters->areAllMandatoryParametersSet()) {
-          throw new \InvalidArgumentException('Missing parameter');
-      }
+        if (!$parameters->areAllMandatoryParametersSet()) {
+            throw new \InvalidArgumentException('Missing parameter');
+        }
     }
 }
