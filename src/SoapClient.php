@@ -16,7 +16,7 @@ abstract class SoapClient implements SoapClientInterface
     public $wsdlEnvironment;
     protected $streamContextOption = array();
     protected $certificatePeerName = array(
-        'test' => 'testecomm.sella.it',
+        'test'       => 'testecomm.sella.it',
         'production' => 'ecomms2s.sella.it',
     );
     protected $soapClient;
@@ -29,8 +29,8 @@ abstract class SoapClient implements SoapClientInterface
     public function __construct($testEnv = false, $caFile = null)
     {
         $soapClientDefaultOption = array(
-            'user_agent' => 'EndelWar-GestPayWS/1.3 (+https://github.com/endelwar/GestPayWS)',
-            'stream_context' => $this->getStreamContext($testEnv, $caFile),
+            'user_agent'         => 'EndelWar-GestPayWS/1.3 (+https://github.com/endelwar/GestPayWS)',
+            'stream_context'     => $this->getStreamContext($testEnv, $caFile),
             'connection_timeout' => 3000,
         );
         if ($testEnv) {
@@ -49,7 +49,7 @@ abstract class SoapClient implements SoapClientInterface
     {
         $this->wsdlEnvironment = 'test';
         $soapClientTestOption = array(
-            'trace' => true,
+            'trace'      => true,
             'cache_wsdl' => WSDL_CACHE_NONE,
         );
 

@@ -19,7 +19,7 @@ class WSCryptDecryptSoapClient extends SoapClient
     public static function getWsdlUrl($wsdlEnvironment)
     {
         $environments = array(
-            'test' => 'https://testecomm.sella.it/gestpay/GestPayWS/WsCryptDecrypt.asmx?wsdl',
+            'test'       => 'https://testecomm.sella.it/gestpay/GestPayWS/WsCryptDecrypt.asmx?wsdl',
             'production' => 'https://ecomms2s.sella.it/gestpay/GestPayWS/WsCryptDecrypt.asmx?wsdl',
         );
         return $environments[$wsdlEnvironment];
