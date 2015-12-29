@@ -11,20 +11,8 @@
 
 namespace EndelWar\GestPayWS;
 
-use EndelWar\GestPayWS\Parameter\PagamParameter;
-use EndelWar\GestPayWS\Parameter\CheckCardParameter;
-use EndelWar\GestPayWS\Parameter\VerifyCardParameter;
-use EndelWar\GestPayWS\Parameter\SettleParameter;
-use EndelWar\GestPayWS\Parameter\RefundParameter;
-use EndelWar\GestPayWS\Parameter\DeleteParameter;
-use EndelWar\GestPayWS\Parameter\RequestTokenParameter;
-use EndelWar\GestPayWS\Response\PagamResponse;
-use EndelWar\GestPayWS\Response\CheckCardResponse;
-use EndelWar\GestPayWS\Response\VerifyCardResponse;
-use EndelWar\GestPayWS\Response\SettleResponse;
-use EndelWar\GestPayWS\Response\RefundResponse;
-use EndelWar\GestPayWS\Response\DeleteResponse;
-use EndelWar\GestPayWS\Response\RequestTokenResponse;
+use EndelWar\GestPayWS\Parameter;
+use EndelWar\GestPayWS\Response;
 
 /**
  * Class WsS2S
@@ -32,80 +20,82 @@ use EndelWar\GestPayWS\Response\RequestTokenResponse;
  */
 class WSS2S extends Service
 {
+
     /**
      * @param PagamParameter $parameters
      * @return EncryptResponse
      */
-    public function pagam(PagamParameter $parameters)
+    public function pagam(Parameter\PagamParameter $parameters)
     {
         $this->validateParameters($parameters);
         $soapResponse = $this->soapClient->callPagamS2S($parameters);
-        return new PagamResponse($soapResponse);
+        return new Response\PagamResponse($soapResponse);
     }
 
     /**
      * @param CheckCardParameter $parameters
      * @return EncryptResponse
      */
-    public function checkCard(CheckCardParameter $parameters)
+    public function checkCard(Parameter\CheckCardParameter $parameters)
     {
         $this->validateParameters($parameters);
         $soapResponse = $this->soapClient->callCheckCartaS2S($parameters);
-        return new CheckCardResponse($soapResponse);
+        return new Response\CheckCardResponse($soapResponse);
     }
 
     /**
      * @param VerifyCardParameter $parameters
      * @return EncryptResponse
      */
-    public function verifyCard(VerifyCardParameter $parameters)
+    public function verifyCard(Parameter\erifyCardParameter $parameters)
     {
         $this->validateParameters($parameters);
         $soapResponse = $this->soapClient->callVerifyCardS2S($parameters);
-        return new VerifyCardResponse($soapResponse);
+        return new Response\VerifyCardResponse($soapResponse);
     }
 
     /**
      * @param SettleParameter $parameters
      * @return EncryptResponse
      */
-    public function settle(SettleParameter $parameters)
+    public function settle(Parameter\SettleParameter $parameters)
     {
         $this->validateParameters($parameters);
         $soapResponse = $this->soapClient->callSettleS2S($parameters);
-        return new SettleResponse($soapResponse);
+        return new Response\SettleResponse($soapResponse);
     }
 
     /**
      * @param RefundParameter $parameters
      * @return EncryptResponse
      */
-    public function refund(RefundParameter $parameters)
+    public function refund(Parameter\RefundParameter $parameters)
     {
         $this->validateParameters($parameters);
         $soapResponse = $this->soapClient->callRefundS2S($parameters);
-        return new RefundResponse($soapResponse);
+        return new Response\RefundResponse($soapResponse);
     }
 
     /**
      * @param DeleteParameter $parameters
      * @return EncryptResponse
      */
-    public function delete(DeleteParameter $parameters)
+    public function delete(Parameter\DeleteParameter $parameters)
     {
         $this->validateParameters($parameters);
         $soapResponse = $this->soapClient->callDeleteS2S($parameters);
-        return new DeleteResponse($soapResponse);
+        return new Response\DeleteResponse($soapResponse);
     }
 
     /**
      * @param RequestTokenParameter $parameters
      * @return RequestTokenResponse
      */
-    public function requestToken(RequestTokenParameter $parameters)
+    public function requestToken(Parameter\RequestTokenParameter $parameters)
     {
         $this->validateParameters($parameters);
         $soapResponse = $this->soapClient->callRequestTokenS2S($parameters);
-        return new RequestTokenResponse($soapResponse);
+        return new Response\RequestTokenResponse($soapResponse);
     }
+
 }
