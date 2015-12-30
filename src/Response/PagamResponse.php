@@ -17,6 +17,10 @@ namespace EndelWar\GestPayWS\Response;
  */
 class PagamResponse extends Response
 {
+    protected $paymentPageUrl = array(
+        'test' => 'https://testecomm.sella.it/pagam/pagam.aspx',
+        'production' => 'https://ecomm.sella.it/pagam/pagam.aspx',
+    );
     protected $parametersName = array(
       'TransactionType',
       'TransactionResult',
@@ -48,5 +52,15 @@ class PagamResponse extends Response
     {
         $xml = simplexml_load_string($soapResponse->callPagamS2SResult->any);
         parent::__construct($xml);
+    }
+
+    /**
+     * @param string $shopLogin
+     * @param string $wsdlEnvironment
+     * @return string
+     */
+    public function getPaymentPageUrl($shopLogin, $wsdlEnvironment)
+    {
+        return $this->paymentPageUrl[$wsdlEnvironment] . '?a=' . $shopLogin . '&b=' . $this->CryptDecryptString;
     }
 }
