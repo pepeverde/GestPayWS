@@ -33,16 +33,16 @@ $ composer require endelwar/gestpayws
 ``` php
 require __DIR__ . '/../vendor/autoload.php';
 
-use EndelWar\GestPayWS\WSCryptDecryptSoapClient;
-use EndelWar\GestPayWS\WSCryptDecrypt;
+use EndelWar\GestPayWS\WSS2SSoapClient;
+use EndelWar\GestPayWS\WSS2S;
 use EndelWar\GestPayWS\Parameter\EncryptParameter;
 use EndelWar\GestPayWS\Data;
 
 // enable or disable test environment
 $enableTestEnv = true;
-$soapClient = new WSCryptDecryptSoapClient($enableTestEnv);
+$soapClient = new WSS2SSoapClient($enableTestEnv);
 try {
-    $gestpay = new WSCryptDecrypt($soapClient->getSoapClient());
+    $gestpay = new WSS2S($soapClient->getSoapClient());
 } catch (\Exception $e) {
     var_dump($e->getCode(), $e->getMessage());
 }
@@ -88,7 +88,7 @@ $soapClient = new WSCryptDecryptSoapClient($enableTestEnv);
 try {
     $gestpay = new WSCryptDecrypt($soapClient->getSoapClient());
     $decryptResult = $gestpay->decrypt($decryptParam);
-    
+
     echo $decryptResult->TransactionResult;
 } catch (\Exception $e) {
     var_dump($e->getCode(), $e->getMessage());
