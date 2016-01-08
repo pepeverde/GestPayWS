@@ -18,7 +18,7 @@ use InvalidArgumentException;
  * @package EndelWar\GestPayWS\Parameter
  *
  * @property string $shopLogin
- * @property string $shopTransactionId;
+ * @property string $shopTransID;
  * @property string $amount;
  * @property string $uicCode;
  * @property string $bankTransID;
@@ -29,7 +29,7 @@ class SettleParameter extends Parameter
 {
     protected $parametersName = array(
       'shopLogin',
-      'shopTransactionId',
+      'shopTransID',
       'amount',
       'uicCode',
       'bankTransID',
@@ -38,7 +38,7 @@ class SettleParameter extends Parameter
     );
     protected $mandatoryParameters = array(
       'shopLogin',
-      'shopTransactionId',
+      'shopTransID',
       'amount',
       'uicCode',
       'bankTransID',
