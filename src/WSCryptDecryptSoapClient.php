@@ -107,7 +107,6 @@ class WSCryptDecryptSoapClient
             $this->streamContextOption['ssl']['verify_peer_name'] = false;
         }
         $this->streamContextOption['http']['user_agent'] = 'PHPSoapClient';
-        //var_dump($this->streamContextOption);exit;
         return stream_context_create($this->streamContextOption);
     }
 
