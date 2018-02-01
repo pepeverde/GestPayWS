@@ -33,37 +33,37 @@ $ composer require endelwar/gestpayws
 ``` php
 require __DIR__ . '/../vendor/autoload.php';
 
-use EndelWar\GestPayWS\WSCryptDecryptSoapClient;
-use EndelWar\GestPayWS\WSCryptDecrypt;
-use EndelWar\GestPayWS\Parameter\EncryptParameter;
+use EndelWar\GestPayWS\WSS2SSoapClient;
+use EndelWar\GestPayWS\WSS2S;
+use EndelWar\GestPayWS\Parameter;
 use EndelWar\GestPayWS\Data;
 
 // enable or disable test environment
 $enableTestEnv = true;
-$soapClient = new WSCryptDecryptSoapClient($enableTestEnv);
+$soapClient = new WSS2SSoapClient($enableTestEnv);
 try {
-    $gestpay = new WSCryptDecrypt($soapClient->getSoapClient());
+    $gestpay = new WSS2S($soapClient->getSoapClient());
 } catch (\Exception $e) {
     var_dump($e->getCode(), $e->getMessage());
 }
 
 // set mandatory info
-$encryptParameter = new EncryptParameter();
-$encryptParameter->shopLogin = 'GESPAY12345';
-$encryptParameter->amount = '1.23';
-$encryptParameter->shopTransactionId = '1';
-$encryptParameter->uicCode = Data\Currency::EUR;
-$encryptParameter->languageId = Data\Language::ITALIAN;
+$pagamParameter = new Parameter\PagamParameter();
+$pagamParameter->shopLogin = 'GESPAY12345';
+$pagamParameter->amount = '1.23';
+$pagamParameter->shopTransactionId = '1';
+$pagamParameter->uicCode = Data\Currency::EUR;
+$pagamParameter->languageId = Data\Language::ITALIAN;
 
 // set optional custom info as array
 $customArray = array('STORE_ID' => '42', 'STORE_NAME' => 'Shop Abc123');
-$encryptParameter->setCustomInfo($customArray);
+$pagamParameter->setCustomInfo($customArray);
 
 // encrypt data
-$encryptResult = $gestpay->encrypt($encryptParameter);
+$gestpayResult = $gestpay->pagam($pagamParameter);
 
 // get redirect link to Banca Sella
-echo $encryptResult->getPaymentPageUrl($encryptParameter->shopLogin, $soapClient->wsdlEnvironment);
+echo $gestpayResult->getPaymentPageUrl($pagamParameter->shopLogin, $soapClient->wsdlEnvironment);
 ```
 
 ### Decrypt
@@ -88,7 +88,7 @@ $soapClient = new WSCryptDecryptSoapClient($enableTestEnv);
 try {
     $gestpay = new WSCryptDecrypt($soapClient->getSoapClient());
     $decryptResult = $gestpay->decrypt($decryptParam);
-    
+
     echo $decryptResult->TransactionResult;
 } catch (\Exception $e) {
     var_dump($e->getCode(), $e->getMessage());

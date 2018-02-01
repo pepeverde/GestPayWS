@@ -20,31 +20,17 @@ use EndelWar\GestPayWS\Response\EncryptResponse;
  * Class WSCryptDecrypt
  * @package EndelWar\GestPayWS
  */
-class WSCryptDecrypt
+class WSCryptDecrypt extends Service
 {
-    private $soapClient;
-
-    /**
-     * @param \SoapClient $soapClient
-     */
-    public function __construct(\SoapClient $soapClient)
-    {
-        $this->soapClient = $soapClient;
-    }
-
     /**
      * @param EncryptParameter $parameters
      * @return EncryptResponse
      */
     public function encrypt(EncryptParameter $parameters)
     {
-        if (!$parameters->areAllMandatoryParametersSet()) {
-            throw new \InvalidArgumentException('Missing parameter');
-        }
+        $this->validateParameters($parameters);
         $soapResponse = $this->soapClient->Encrypt($parameters);
-        $encryptResponse = new EncryptResponse($soapResponse);
-
-        return $encryptResponse;
+        return new EncryptResponse($soapResponse);
     }
 
     /**
@@ -53,12 +39,8 @@ class WSCryptDecrypt
      */
     public function decrypt(DecryptParameter $parameters)
     {
-        if (!$parameters->areAllMandatoryParametersSet()) {
-            throw new \InvalidArgumentException('Missing parameter');
-        }
+        $this->validateParameters($parameters);
         $soapResponse = $this->soapClient->Decrypt($parameters);
-        $decryptResponse = new DecryptResponse($soapResponse);
-
-        return $decryptResponse;
+        return new DecryptResponse($soapResponse);
     }
 }

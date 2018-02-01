@@ -11,7 +11,7 @@
 
 namespace EndelWar\GestPayWS;
 
-class WSCryptDecryptSoapClient extends SoapClient
+class WSS2SSoapClient extends SoapClient
 {
     /**
      * {@inheritdoc}
@@ -19,8 +19,8 @@ class WSCryptDecryptSoapClient extends SoapClient
     public static function getWsdlUrl($wsdlEnvironment)
     {
         $environments = array(
-            'test'       => 'https://testecomm.sella.it/gestpay/GestPayWS/WsCryptDecrypt.asmx?wsdl',
-            'production' => 'https://ecomms2s.sella.it/gestpay/GestPayWS/WsCryptDecrypt.asmx?wsdl',
+            'test' => 'https://testecomm.sella.it/gestpay/GestPayWS/WsS2S.asmx?wsdl',
+            'production' => 'https://ecommS2S.sella.it/gestpay/GestPayWS/WsS2S.asmx?wsdl',
         );
         return $environments[$wsdlEnvironment];
     }

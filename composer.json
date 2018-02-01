@@ -1,21 +1,25 @@
 {
-  "name": "endelwar/gestpayws",
+  "name": "cristianp6/gestpayws",
   "type": "library",
   "description": "PHP implementation of GestPay (Banca Sella) Web Services",
-  "keywords": [
-    "gestpay",
-    "bancasella",
-    "webservice"
-  ],
+  "keywords": ["gestpay","bancasella","webservice"],
   "license": "MIT",
   "authors": [
     {
       "name": "Manuel Dalla Lana",
       "email": "endelwar@aregar.it"
+    },
+    {
+      "name": "Gregorio Magini",
+      "email": ""
+    },
+    {
+      "name": "Cristian Pascottini",
+      "email": "cristianp6@gmail.com"
     }
   ],
   "support": {
-    "issues": "https://github.com/endelwar/GestPayWS/issues"
+    "issues": "https://github.com/cristianp6/GestPayWS/issues"
   },
   "autoload": {
     "psr-4": {
