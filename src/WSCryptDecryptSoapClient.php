@@ -82,10 +82,15 @@ class WSCryptDecryptSoapClient
             $host = $this->certificatePeerName['production'];
         }
 
-        $this->streamContextOption['ssl']['crypto_method'] = STREAM_CRYPTO_METHOD_ANY_CLIENT;
+        if (PHP_VERSION_ID > 50600) {
+          $this->streamContextOption['ssl']['crypto_method'] = STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT;
+        } else {
+          $this->streamContextOption['ssl']['crypto_method'] = STREAM_CRYPTO_METHOD_TLS_CLIENT;
+        }
+
         $this->streamContextOption['ssl']['allow_self_signed'] = true;
-        $this->streamContextOption['ssl']['verify_peer'] = false;
-        $this->streamContextOption['ssl']['SNI_enabled'] = false;
+        $this->streamContextOption['ssl']['verify_peer'] = true;
+        $this->streamContextOption['ssl']['SNI_enabled'] = true;
 
         // Disable TLS compression to prevent CRIME attacks where supported (PHP 5.4.13 or later).
         if (PHP_VERSION_ID >= 50413) {
@@ -106,7 +111,7 @@ class WSCryptDecryptSoapClient
             $this->streamContextOption['ssl']['peer_name'] = $host;
             $this->streamContextOption['ssl']['verify_peer_name'] = false;
         }
-        $this->streamContextOption['http']['user_agent'] = 'EndelWar-GestPayWS/1.3 (+https://github.com/marcio199226/GestPayWS)';
+        $this->streamContextOption['http']['user_agent'] = 'PHPSoapClient';
         return stream_context_create($this->streamContextOption);
     }
 
