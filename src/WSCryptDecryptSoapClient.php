@@ -106,7 +106,7 @@ class WSCryptDecryptSoapClient
             $this->streamContextOption['ssl']['peer_name'] = $host;
             $this->streamContextOption['ssl']['verify_peer_name'] = false;
         }
-        $this->streamContextOption['http']['user_agent'] = 'PHPSoapClient';
+        $this->streamContextOption['http']['user_agent'] = 'EndelWar-GestPayWS/1.3 (+https://github.com/marcio199226/GestPayWS)';
         return stream_context_create($this->streamContextOption);
     }
 
