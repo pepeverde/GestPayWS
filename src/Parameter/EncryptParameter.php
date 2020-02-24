@@ -182,9 +182,7 @@ class EncryptParameter extends Parameter
         $invalidCharsFlattened = $this->invalidCharsFlattened;
 
         if (strtolower($key) == 'apikey') {
-            if (($key = array_search('=', $invalidCharsFlattened)) !== false) {
-                unset($invalidCharsFlattened[$key]);
-            }
+            $invalidCharsFlattened = str_replace('|\=|', '|', $invalidCharsFlattened);
         }
 
         if (preg_match_all('#' . $invalidCharsFlattened . '#', $value, $matches)) {
