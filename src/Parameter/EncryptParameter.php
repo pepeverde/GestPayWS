@@ -121,10 +121,10 @@ class EncryptParameter extends Parameter
      */
     public function set($key, $value)
     {
-        if (!in_array($key, $this->parametersName, true)) {
+        if (! in_array($key, $this->parametersName, true)) {
             throw new InvalidArgumentException(sprintf('%s is not a valid parameter name.', $key));
         }
-        $this->verifyParameterValidity($value);
+        $this->verifyParameterValidity($value, $key);
         parent::set($key, $value);
     }
 
@@ -133,7 +133,7 @@ class EncryptParameter extends Parameter
      */
     public function setCustomInfo($customInfo)
     {
-        if (!is_array($customInfo)) {
+        if (! is_array($customInfo)) {
             $this->data['customInfo'] = $customInfo;
         } else {
             //check string validity
@@ -141,7 +141,7 @@ class EncryptParameter extends Parameter
             foreach ($customInfo as $key => $value) {
                 $value = urlencode($value);
                 $this->verifyParameterValidity($key);
-                $this->verifyParameterValidity($value);
+                $this->verifyParameterValidity($value, $key);
 
                 if (strlen($value) > 300) {
                     $value = substr($value, 0, 300);
@@ -172,14 +172,22 @@ class EncryptParameter extends Parameter
      * @param $value
      * @return bool
      */
-    public function verifyParameterValidity($value)
+    public function verifyParameterValidity($value, $key = null)
     {
         if ('' === $this->invalidCharsFlattened) {
             $invalidCharsQuoted = array_map('preg_quote', $this->invalidChars);
             $this->invalidCharsFlattened = implode('|', $invalidCharsQuoted);
         }
 
-        if (preg_match_all('#' . $this->invalidCharsFlattened . '#', $value, $matches)) {
+        $invalidCharsFlattened = $this->invalidCharsFlattened;
+
+        if ($key == 'apiKey') {
+            if (($key = array_search('=', $invalidCharsFlattened)) !== false) {
+                unset($invalidCharsFlattened[$key]);
+            }
+        }
+
+        if (preg_match_all('#' . $invalidCharsFlattened . '#', $value, $matches)) {
             $invalidCharsMatched = '"' . implode('", "', $matches[0]) . '"';
             throw new InvalidArgumentException(
                 'String ' . $value . ' contains invalid chars (i.e.: ' . $invalidCharsMatched . ').'
